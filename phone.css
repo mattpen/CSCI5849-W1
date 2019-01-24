@@ -69,3 +69,7 @@ label {
 #contact-list {
 	width: 500px;
 }
+
+.error {
+	background: pink;
+}

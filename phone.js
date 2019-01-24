@@ -42,6 +42,7 @@ $( document ).ready( () => {
 	}
 
 	$( '#add-contact-form' ).submit( ( event ) =>{
+		$('.error').removeClass('error');
 		if ( !!$('input[name=name-input]').val() && !!$('input[name=phone-input]').val() && !!$('input[name=email-input]').val() ) {
 			createContact({
 				name: $('input[name=name-input]').val(),
@@ -50,12 +51,25 @@ $( document ).ready( () => {
 			} );
 			$( '#contact-list-nav' ).click()
 		}
+		else {
+			if ( !$('input[name=name-input]').val() ) {
+				$('input[name=name-input]').addClass( 'error' );
+			}
+			if ( !$('input[name=phone-input]').val() ) {
+				$('input[name=phone-input]').addClass( 'error' );
+			}
+			if ( !$('input[name=email-input]').val() ) {
+				$('input[name=email-input]').addClass( 'error' );
+			}
+		}
 
 		// Prevent reload since no server is present
 		return false;
 	} );
 
-	$( '#clear-add-contact-form-button' ).click( () => {
+	$( '#clear-add-contact-form-button' ).click( ( event ) => {
+		event.preventDefault();
+		$('.error').removeClass('error');
 		$('input[name=name-input]').val( '' )
 		$('input[name=phone-input]').val( '' )
 		$('input[name=email-input]').val( '' )
@@ -67,11 +81,18 @@ $( document ).ready( () => {
 	} );
 
 	$( '#clear-dialer-button' ).click( () => {
+		$('.error').removeClass('error');
 		$( 'input[name=dialer-textbox]' ).val( '' );
 	} );
 
 	$( '#dial-button' ).click( () => {
-		alert( 'Dialing ' + $( 'input[name=dialer-textbox]' ).val() );
+		$('.error').removeClass('error');
+		if ( !$( 'input[name=dialer-textbox]' ).val() ) {
+			$( 'input[name=dialer-textbox]' ).addClass( 'error' );
+		}
+		else {
+			alert( 'Dialing ' + $( 'input[name=dialer-textbox]' ).val() );
+		}
 	} );
 } );
 
