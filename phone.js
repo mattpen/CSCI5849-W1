@@ -55,7 +55,7 @@ $( document ).ready( () => {
 		return false;
 	} );
 
-	$( '#clear-button' ).click( () => {
+	$( '#clear-add-contact-form-button' ).click( () => {
 		$('input[name=name-input]').val( '' )
 		$('input[name=phone-input]').val( '' )
 		$('input[name=email-input]').val( '' )
