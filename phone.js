@@ -9,9 +9,8 @@ const createContact = ( contact ) => {
   const button = '<button class="contact-button" id="contact-' + contact.id + '">' + contact.name + '</button>';
   $contactContainer.append( button );
   $( '#contact-' + contact.id ).click( () => {
-  	console.log('contact push')
   	$( '#dialer-nav' ).click();
-  	$( '#dialer-textbox' ).attr( 'value', contact.phone );
+  	$( 'input[name=dialer-textbox]' ).val( contact.phone  );
   } ); 
 };
 
@@ -42,7 +41,38 @@ $( document ).ready( () => {
 		createContact( contact );
 	}
 
-	$( '#')
+	$( '#add-contact-form' ).submit( ( event ) =>{
+		if ( !!$('input[name=name-input]').val() && !!$('input[name=phone-input]').val() && !!$('input[name=email-input]').val() ) {
+			createContact({
+				name: $('input[name=name-input]').val(),
+				phone: $('input[name=phone-input]').val(),
+				email: $('input[name=email-input]').val() 
+			} );
+			$( '#contact-list-nav' ).click()
+		}
+
+		// Prevent reload since no server is present
+		return false;
+	} );
+
+	$( '#clear-button' ).click( () => {
+		$('input[name=name-input]').val( '' )
+		$('input[name=phone-input]').val( '' )
+		$('input[name=email-input]').val( '' )
+	} );
+
+	$( '.dialer-pad-button' ).click( ( event ) => {
+		const originalVal = $( 'input[name=dialer-textbox]' ).val();
+		$( 'input[name=dialer-textbox]' ).val( originalVal + '' + event.target.id );
+	} );
+
+	$( '#clear-dialer-button' ).click( () => {
+		$( 'input[name=dialer-textbox]' ).val( '' );
+	} );
+
+	$( '#dial-button' ).click( () => {
+		alert( 'Dialing ' + $( 'input[name=dialer-textbox]' ).val() );
+	} );
 } );
 
 

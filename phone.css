@@ -47,6 +47,7 @@ button {
 
 #dialer-textbox {
     width: 305px;
+    text-align: right;
 }
 
 label {
